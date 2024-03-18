@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Individual Assignment</string>
+    <string name="mathematics">Mathematics</string>
+    <string name="compare">Compare</string>
+    <string name="order">Order</string>
+    <string name="composing">Composing</string>
+    <string name="compare_numberz">Compare Numberz</string>
+    <string name="which_number_is_larger">Which number is larger?</string>
+    <string name="which_number_is_smaller">Which number is smaller?</string>
+    <string name="ans1">ans1</string>
+    <string name="ans2">ans2</string>
+    <string name="back">Back</string>
+</resources>
