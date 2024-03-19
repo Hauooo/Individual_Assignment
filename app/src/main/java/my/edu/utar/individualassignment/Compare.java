@@ -2,119 +2,92 @@ package my.edu.utar.individualassignment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class Compare extends AppCompatActivity {
+
+    private int BigOrSmall;
+    private Button button_left;
+    private Button button_right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
 
-        // declare a new int variable
-        int BigOrSmall;
+        // Initialize buttons
+        button_left = findViewById(R.id.ansbt1);
+        button_right = findViewById(R.id.ansbt2);
 
+        // Generate initial question
+        generateQuestion();
 
-        // Random either Bigger or Smaller
-        int random = (int) (Math.random() * 2);
-        if (random == 0) {
-            // Bigger
-            BigOrSmall = 1;
-            //Replace CompareTitle text with "Bigger"
-            TextView CompareTitle = findViewById(R.id.QuestionText);
-            CompareTitle.setText(R.string.which_number_is_larger);
+        // Set onClickListener for button_left
+        button_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAnswer(button_left);
+            }
+        });
 
-        }
-        else {
-            // Smaller
-            BigOrSmall = 0;
-            //Replace CompareTitle text with "Smaller"
-            TextView CompareTitle = findViewById(R.id.QuestionText);
-            CompareTitle.setText(R.string.which_number_is_smaller);
-        }
+        // Set onClickListener for button_right
+        button_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAnswer(button_right);
+            }
+        });
 
-        // Get the button
-        Button button_left = (Button) findViewById(R.id.ansbt1);
-        Button button_right = (Button) findViewById(R.id.ansbt2);
+        // Set onClickListener for back button
+        Button back = findViewById(R.id.backBt);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Close the current activity and return to the previous one
+            }
+        });
+    }
 
-        // Create 2 random integers and set text to the buttons
+    private void generateQuestion() {
+        // Randomly decide if the question should be about finding a bigger or smaller number
+        BigOrSmall = (int) (Math.random() * 2);
+
+        // Set question text based on BigOrSmall value
+        TextView CompareTitle = findViewById(R.id.QuestionText);
+        CompareTitle.setText(BigOrSmall == 1 ? R.string.which_number_is_larger : R.string.which_number_is_smaller);
+
+        // Generate random numbers and set text to buttons
         int randomleft = (int) (Math.random() * 100);
         int randomright = (int) (Math.random() * 100);
         button_left.setText(String.valueOf(randomleft));
         button_right.setText(String.valueOf(randomright));
-
-        // Create a button listener
-        button_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create an intent to start the compare activity
-                if (BigOrSmall == 1 /*Bigger*/) {
-                    if (randomleft > randomright){
-                        Toast.makeText(Compare.this, "Correct!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(Compare.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else /*Smaller*/{
-                    if (randomleft < randomright){
-                        Toast.makeText(Compare.this, "Correct!", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(Compare.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                Intent intent = new Intent(Compare.this, Compare.class);
-                // Start the activity
-                startActivity(intent);
-            }
-        });
-
-        // Create a button listener
-        button_right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create an intent to start the compare activity
-                if (BigOrSmall == 1 /*Bigger*/) {
-                    if (randomright > randomleft){
-                        Toast.makeText(Compare.this, "Correct!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(Compare.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else /*Smaller*/{
-                    if (randomright < randomleft){
-                        Toast.makeText(Compare.this, "Correct!", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(Compare.this, "Wrong!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                Intent intent = new Intent(Compare.this, Compare.class);
-                // Start the activity
-                startActivity(intent);
-            }
-        });
-
-        Button back = (Button) findViewById(R.id.backBt);
-        {
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Compare.this, MainActivity.class);
-
-                    startActivity(intent);
-                }
-            });
-        }
     }
 
+    private void checkAnswer(Button selectedButton) {
+        int leftNumber = Integer.parseInt(button_left.getText().toString());
+        int rightNumber = Integer.parseInt(button_right.getText().toString());
 
+        boolean correct = false;
+
+        if ((BigOrSmall == 1 && leftNumber > rightNumber) || (BigOrSmall == 0 && leftNumber < rightNumber)) {
+            correct = true;
+        }
+
+        if (selectedButton.getId() == R.id.ansbt1 && correct) {
+            Snackbar.make(findViewById(android.R.id.content), "Correct!", Snackbar.LENGTH_SHORT).show();
+        } else if (selectedButton.getId() == R.id.ansbt2 && !correct) {
+            Snackbar.make(findViewById(android.R.id.content), "Correct!", Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(findViewById(android.R.id.content), "Incorrect!", Snackbar.LENGTH_SHORT).show();
+        }
+
+        // Generate a new question
+        generateQuestion();
+    }
 
 }
