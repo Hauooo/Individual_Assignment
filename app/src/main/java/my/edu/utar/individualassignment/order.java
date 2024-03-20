@@ -1,28 +1,25 @@
 package my.edu.utar.individualassignment;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.media.MediaPlayer;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-
 public class order extends AppCompatActivity {
-
     private List<Button> btnNum;
     private List<Integer> num;
     private List<Integer> input;
     private boolean asc;
+    private MediaPlayer background;
+    private MediaPlayer CorrectEffect;
+    private MediaPlayer WrongEffect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +34,13 @@ public class order extends AppCompatActivity {
         Button btn6 = findViewById(R.id.num6Button);
         Button backBtn = findViewById(R.id.backButton);
         Button undoBtn = findViewById(R.id.undoButton);
+
+        background = MediaPlayer.create(this, R.raw.orderbackground);
+        background.setLooping(true); // Loop the background music
+        background.start();
+
+        CorrectEffect = MediaPlayer.create(this, R.raw.correct);
+        WrongEffect = MediaPlayer.create(this, R.raw.wrong);
 
         btnNum = new ArrayList<>();
         btnNum.add(btn1);
@@ -74,7 +78,8 @@ public class order extends AppCompatActivity {
         backBtn.setOnClickListener(v -> {
             Intent intent = new Intent(order.this, MainActivity.class);
             startActivity(intent);
-            finish(); // Optional: Close the current activity when navigating back
+            background.release();
+            finish();
         });
 
 
@@ -135,15 +140,39 @@ public class order extends AppCompatActivity {
         if (input.equals(correctOrder)) {
             // User input is correct
             Snackbar.make(findViewById(android.R.id.content), "Correct!", Snackbar.LENGTH_SHORT).show();
+            playSoundEffect(CorrectEffect);
         } else {
             // User input is incorrect
             Snackbar.make(findViewById(android.R.id.content), "Incorrect! PLease try again", Snackbar.LENGTH_SHORT).show();
+            playSoundEffect(WrongEffect);
         }
 
         // Reset userInput and display buttons again
         input.clear();
         generateRandomNumbers();
         updateInstruction();
+    }
+
+    private void playSoundEffect(MediaPlayer mediaPlayer) {
+        if (mediaPlayer != null) {
+            mediaPlayer.seekTo(0); // Rewind the sound to the beginning
+            mediaPlayer.start(); // Start playing the sound effect
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (CorrectEffect != null) {
+            CorrectEffect.release(); // Release the MediaPlayer resources
+        }
+        if (WrongEffect != null) {
+            WrongEffect.release(); // Release the MediaPlayer resources
+        }
+        if (background != null) {
+            background.release();
+            background = null;
+        }
     }
 
     private void undoLastInput() {

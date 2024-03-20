@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F0F0F0"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/_88780c8c378deb14bb30833df086f08"
+        android:contentDescription="@string/todo" />
+
+    <!-- TextView with semi-transparent background -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
-        android:text="Meth Game"
+        android:background="#BF9C27B0"
+        android:padding="16dp"
+        android:text="@string/meth_game"
         android:textColor="#000000"
         android:textSize="32sp"
         android:textStyle="bold" />
 
+    <!-- Subtitle TextView with semi-transparent background -->
     <TextView
         android:id="@+id/cool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="95dp"
-        android:text="Please select one game!"
+        android:layout_marginTop="150dp"
+        android:background="#A8F44336"
+        android:padding="8dp"
+        android:text="@string/please_select_one_game"
         android:textColor="#000000"
-        android:textSize="32sp" />
+        android:textSize="16sp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -43,7 +57,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_background"
-            android:text="@string/compare"
+            android:text="@string/compare_numbers"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
@@ -56,7 +70,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_background"
-            android:text="@string/order"
+            android:text="@string/arrange_in_order"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
@@ -69,7 +83,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_background"
-            android:text="@string/composing"
+            android:text="@string/additional_subtraction"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />

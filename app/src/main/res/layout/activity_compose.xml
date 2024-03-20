@@ -1,126 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:text="Back"
-        android:textColor="?attr/colorOnBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:icon="@android:drawable/ic_menu_revert"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose 2 numbers to complete the equation"
-        android:textSize="24sp"
-        android:textColor="?attr/colorOnBackground"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/equationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Equation: x + y = ?"
-        android:textAlignment="center"
-        android:textColor="?attr/colorOnBackground"
-        android:textSize="20sp" />
+    android:background="@drawable/_88780c8c378deb14bb30833df086f08">
 
     <LinearLayout
-        android:id="@+id/numbersLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textColor="?attr/colorOnBackground"
-            android:backgroundTint="?attr/colorPrimary"
-            android:layout_marginEnd="8dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:textColor="?attr/colorOnBackground"
-            android:backgroundTint="?attr/colorPrimary"
-            android:layout_marginStart="8dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/numbersLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3"
-            android:textColor="?attr/colorOnBackground"
-            android:backgroundTint="?attr/colorPrimary"
-            android:layout_marginEnd="8dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"
-            android:textColor="?attr/colorOnBackground"
-            android:backgroundTint="?attr/colorPrimary"
-            android:layout_marginEnd="8dp"/>
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/confirmBtn"
-            android:layout_width="0dp"
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="?attr/colorPrimary"
-            android:text="Confirm"
-            android:textColor="?attr/colorOnBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:text="@string/composeback"
+            android:textColor="#D1C4E9"
+            app:icon="@android:drawable/ic_menu_revert"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/undoBtn"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Undo"
+            android:layout_marginBottom="16dp"
+            android:background="#B49C27B0"
+            android:text="@string/choose_2_numbers_to_complete_the_equation"
             android:textColor="?attr/colorOnBackground"
-            android:backgroundTint="?attr/colorPrimary"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmBtn"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textSize="24sp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/equationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="#BF9C27B0"
+            android:text="@string/equation_x_y"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/numbersLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/_1"
+                android:textColor="#D1C4E9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/_2"
+                android:textColor="#D1C4E9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/numbersLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/_3"
+                android:textColor="#D1C4E9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/_4"
+                android:textColor="#D1C4E9" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
+            android:layout_width="378dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- Confirm button -->
+            <Button
+                android:id="@+id/confirmButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="?attr/colorPrimary"
+                android:text="@string/order_confirm"
+                android:textColor="?attr/colorOnPrimary" />
+
+            <!-- Undo button -->
+            <Button
+                android:id="@+id/undoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="?attr/colorPrimary"
+                android:text="@string/order_undo"
+                android:textColor="?attr/colorOnPrimary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

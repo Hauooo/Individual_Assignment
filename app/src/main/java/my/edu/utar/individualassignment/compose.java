@@ -1,29 +1,26 @@
 package my.edu.utar.individualassignment;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.media.MediaPlayer;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
 public class compose extends AppCompatActivity {
-
-
     private TextView equationTextView;
     private List<Button> numberButtons;
-    private Button confirmButton, undoButton, backButton;
-    private int num1, num2, answer;
+    private Button undoButton;
+    private int answer;
     private boolean isAddition;
     private String originalEquation;
+    private MediaPlayer CorrectEffect;
+    private MediaPlayer WrongEffect;
+    private MediaPlayer background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +33,15 @@ public class compose extends AppCompatActivity {
         numberButtons.add(findViewById(R.id.button2));
         numberButtons.add(findViewById(R.id.button3));
         numberButtons.add(findViewById(R.id.button4));
-        confirmButton = findViewById(R.id.confirmBtn);
-        undoButton = findViewById(R.id.undoBtn);
-        backButton = findViewById(R.id.backBtn);
+        Button confirmButton = findViewById(R.id.confirmButton);
+        undoButton = findViewById(R.id.undoButton);
+        Button backButton = findViewById(R.id.backBtn);
 
+        CorrectEffect = MediaPlayer.create(this, R.raw.correct);
+        WrongEffect = MediaPlayer.create(this, R.raw.wrong);
+        background = MediaPlayer.create(this, R.raw.composebackground);
+        background.setLooping(true); // Loop the background music
+        background.start();
         generateEquation();
 
         for (final Button button : numberButtons) {
@@ -70,7 +72,8 @@ public class compose extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(compose.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Optional: Close the current activity when navigating back
+                finish();
+                background.release();// Optional: Close the current activity when navigating back
             }
         });
     }
@@ -92,8 +95,8 @@ public class compose extends AppCompatActivity {
         Collections.shuffle(options);
 
         // Select two numbers to be num1 and num2
-        num1 = options.get(0);
-        num2 = options.get(1);
+        int num1 = options.get(0);
+        int num2 = options.get(1);
 
         // Randomly select addition or subtraction
         isAddition = random.nextBoolean();
@@ -145,23 +148,47 @@ public class compose extends AppCompatActivity {
             if (selectedNum1 + selectedNum2 == answer) {
                 // Show a Snackbar with a correct message
                 Snackbar.make(findViewById(android.R.id.content), "Correct!", Snackbar.LENGTH_SHORT).show();
+                playSoundEffect(CorrectEffect);
                 generateEquation();
             } else {
                 // Show a Snackbar with an incorrect message
                 Snackbar.make(findViewById(android.R.id.content), "Incorrect! Try again.", Snackbar.LENGTH_SHORT).show();
+                playSoundEffect(WrongEffect);
             }
         } else {
             if (selectedNum1 - selectedNum2 == answer) {
                 // Show a Snackbar with a correct message
                 Snackbar.make(findViewById(android.R.id.content), "Correct!", Snackbar.LENGTH_SHORT).show();
+                playSoundEffect(CorrectEffect);
                 generateEquation();
             } else {
                 // Show a Snackbar with an incorrect message
                 Snackbar.make(findViewById(android.R.id.content), "Incorrect! Try again.", Snackbar.LENGTH_SHORT).show();
+                playSoundEffect(WrongEffect);
             }
         }
     }
 
+    private void playSoundEffect(MediaPlayer mediaPlayer) {
+        if (mediaPlayer != null) {
+            mediaPlayer.seekTo(0); // Rewind the sound to the beginning
+            mediaPlayer.start(); // Start playing the sound effect
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (CorrectEffect != null) {
+            CorrectEffect.release(); // Release the MediaPlayer resources
+        }
+        if (WrongEffect != null) {
+            WrongEffect.release();
+        }
+        if (background != null) {
+            background.release();
+            background = null;
+        }
+    }
 
     private void undoLastSelection() {
         // Revert the equation back to its original form

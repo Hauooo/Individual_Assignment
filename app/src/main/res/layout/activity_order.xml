@@ -1,35 +1,47 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/colorSecondary"
-        android:text="Back"
-        android:textColor="#BBDEFB"
-        app:icon="@android:drawable/ic_menu_revert"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/_88780c8c378deb14bb30833df086f08"
+        android:scaleType="centerCrop" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/colorSecondary"
+            android:text="@string/order_back"
+            android:textColor="#FFFFFF"
+            app:icon="@android:drawable/ic_menu_revert"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/instrucTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order the numbers in \nascending/descending order"
-        android:textColor="?attr/colorOnBackground"
+        android:layout_marginTop="16dp"
+        android:background="#A99C27B0"
+        android:text="@string/order_the_numbers_in_nascending_descending_order"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="?attr/colorOnBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
     <LinearLayout
         android:id="@+id/numbersLayout"
@@ -41,7 +53,8 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instrucTextView">
+        app:layout_constraintTop_toBottomOf="@+id/instrucTextView"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -53,19 +66,19 @@
                 android:id="@+id/num1Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number 1" />
+                android:text="@string/number_1" />
 
             <Button
                 android:id="@+id/num2Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number 2" />
+                android:text="@string/number_2" />
 
             <Button
                 android:id="@+id/num3Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number 3" />
+                android:text="@string/number_3" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,19 +91,19 @@
                 android:id="@+id/num4Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number 4" />
+                android:text="@string/number_4" />
 
             <Button
                 android:id="@+id/num5Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number 5" />
+                android:text="@string/number_5" />
 
             <Button
                 android:id="@+id/num6Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number 6" />
+                android:text="@string/number_6" />
         </LinearLayout>
     </LinearLayout>
 
@@ -110,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:text="Confirm"
+            android:text="@string/order_confirm"
             android:textColor="?attr/colorOnPrimary"
             android:layout_marginBottom="8dp"/>
 
@@ -120,10 +133,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:text="Undo"
+            android:text="@string/order_undo"
             android:textColor="?attr/colorOnPrimary"
             android:layout_marginTop="8dp"/>
 
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
